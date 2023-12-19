@@ -1,0 +1,45 @@
+https://dbdiagram.io/d/chargetime-6581399656d8064ca04919d5
+
+Table Account {
+  id int
+  email email
+  phone phone
+  username varchar
+  charge_type id [ref: <> Charge_Type.id]
+  balance int
+  bonuses int
+  first_name varchar
+  last_name varchar
+  role choice
+}
+
+Table Charge_Type {
+  id int
+  type varchar
+  power int
+}
+
+Table Column {
+  id int
+  price int
+  charge_type id [ref: - Station.charge_types]
+  status choice
+}
+
+Table Station {
+  id int
+  charge_types id [ref: <> Charge_Type.id]
+  description text
+  address geo
+  images id [ref: < Image.id]
+  name varchar
+  capacity int
+  columns id [ref: < Column.id]
+  schedule time
+}
+
+Table Image {
+  id int
+  image img
+  title varchar
+}
