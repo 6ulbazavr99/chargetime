@@ -22,7 +22,7 @@ class CustomUser(AbstractUser):
 
     is_active = models.BooleanField(
         _("active"),
-        default=True,  # False for confirmation by email
+        default=False,  # False for confirmation by email
         help_text=_(
             "Designates whether this user should be treated as active. "
             "Unselect this instead of deleting accounts."
