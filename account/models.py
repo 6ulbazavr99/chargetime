@@ -22,7 +22,7 @@ class CustomUser(AbstractUser):
 
     is_active = models.BooleanField(
         _("active"),
-        default=False,  # False for confirmation by email
+        default=True,  # False for confirmation by email
         help_text=_(
             "Designates whether this user should be treated as active. "
             "Unselect this instead of deleting accounts."
@@ -39,3 +39,6 @@ class CustomUser(AbstractUser):
     def create_activation_code(self):
         code = str(uuid4())
         self.activation_code = code
+
+
+# TODO: dohuya
