@@ -1,6 +1,10 @@
-https://dbdiagram.io/d/chargetime-6581399656d8064ca04919d5
+// https://dbdiagram.io/d/chargetime-6581399656d8064ca04919d5
 
+
+
+// account.app //
 Table Account {
+  app account
   id int
   email email
   phone phone
@@ -11,35 +15,61 @@ Table Account {
   first_name varchar
   last_name varchar
   role choice
+  avatar img
 }
+// account.app //
 
+
+
+// station.app //
 Table Charge_Type {
+  app station
   id int
   type varchar
   power int
 }
 
 Table Column {
+  app station
   id int
   price int
   charge_type id [ref: - Station.charge_types]
-  status choice
+  status bool
 }
 
 Table Station {
+  app station
   id int
-  charge_types id [ref: <> Charge_Type.id]
+  charge_types id [ref: <> Charge_Type.id] 
   description text
   address geo
-  images id [ref: < Image.id]
-  name varchar
-  capacity int
+  name varchar 
   columns id [ref: < Column.id]
-  schedule time
+  capacity count [ref: < Station.columns]
+  schedule richtext
+  images id [ref: < Station_Image.id]
 }
 
-Table Image {
+Table Station_Image {
+  app station
   id int
   image img
-  title varchar
+  name varchar
 }
+
+Table Review_Image {
+  app station
+  id int
+  image img
+  name varchar
+}
+
+Table Review {
+  app station
+  id int
+  rating choice
+  body text
+  station id [ref: - Station.id]
+  images id [ref: < Review_Image.id]
+}
+// station.app //

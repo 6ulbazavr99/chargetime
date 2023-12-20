@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     'Station',
     'account',
 
-
 ]
 
 MIDDLEWARE = [
@@ -92,6 +91,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
+        # 'ENGINE': 'django.contrib.gis.db.backends.postgis', # gdal required
         'NAME': cfg('DB_NAME'),
         'USER': cfg('DB_USER'),
         'PASSWORD': cfg('DB_PASSWORD'),
@@ -146,7 +146,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# AUTH_USER_MODEL = 'account.CustomUser'
+AUTH_USER_MODEL = 'account.CustomUser'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
