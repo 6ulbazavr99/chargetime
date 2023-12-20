@@ -90,6 +90,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
+        # 'ENGINE': 'django.contrib.gis.db.backends.postgis', # gdal required
         'NAME': cfg('DB_NAME'),
         'USER': cfg('DB_USER'),
         'PASSWORD': cfg('DB_PASSWORD'),
