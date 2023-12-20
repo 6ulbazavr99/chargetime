@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'leaflet',
 
     # my_apps
+    'Station',
+
 
 
 ]
