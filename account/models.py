@@ -8,8 +8,12 @@ from account.managers import CustomUserManager
 
 
 class CustomUser(AbstractUser):
+    ROLE_CHOICES = (
+        ('user', 'regular user'), ('staff', 'member of staff'), ('admin', 'administrator')
+    )
+
     email = models.EmailField(_('email address'), unique=True)
-    phone = models.CharField(blank=True, unique=True)
+    phone = models.CharField(blank=True, unique=True, null=True)
     username = models.CharField(max_length=100, unique=True)
     first_name = models.CharField(_("first name"), max_length=150, blank=True)
     last_name = models.CharField(_("last name"), max_length=150, blank=True)
@@ -17,8 +21,8 @@ class CustomUser(AbstractUser):
     avatar = models.ImageField(upload_to='avatars', blank=True, default='avatar/default_avatar.jpg')
     balance = models.IntegerField(default=0)
     bonuses = models.IntegerField(default=0)
+    role = models.CharField(choices=ROLE_CHOICES, default='User')
     # charge_type =
-    # role =
 
     is_active = models.BooleanField(
         _("active"),
