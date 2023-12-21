@@ -20,7 +20,7 @@ class Column(models.Model):
         ('true', 'Свободно'),
         ('false', 'Не свободно'))
     price = models.PositiveIntegerField()
-    charge_type = models.OneToOneField(Station.charge_type)
+    charge_type = models.OneToOneField('Station.charge_type')
     status = models.BooleanField()
 
 class Station(models.Model):
