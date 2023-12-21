@@ -9,44 +9,31 @@ User = get_user_model()
 
 
 
+from django.db import models
+from ckeditor.fields import RichTextField
+
 class StationImage(models.Model):
-    name = models.CharField(max_length=255,  blank=True)
+    name = models.CharField(max_length=255, blank=True)
     image = models.ImageField(null=True, blank=True)
 
-
 class ChargeType(models.Model):
-    type = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
     power = models.PositiveIntegerField()
 
-
-
-
-
-
-
 class Column(models.Model):
-    STATUS_CHOICES = (
-        ('true', 'Свободно'),
-        ('false', 'Не свободно'))
     price = models.PositiveIntegerField()
-    # charge_type = models.OneToOneField('Station.charge_types', on_delete=models.CASCADE, related_name='columns')
-    status = models.BooleanField()
-
-
-
-
-
+    station = models.ForeignKey('Station', related_name='columns', on_delete=models.CASCADE)
+    charge_type = models.ForeignKey(ChargeType, on_delete=models.CASCADE)
+    status = models.BooleanField(default=True)
 
 class Station(models.Model):
     charge_types = models.ManyToManyField(ChargeType, related_name='stations')
     desc = models.TextField()
-    # columns = models.ForeignKey(Column,on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     schedule = RichTextField()
     images = models.ForeignKey(StationImage, on_delete=models.CASCADE)
-    #address
     capacity = models.PositiveIntegerField()
-    #def __str__(self):
+
 
 
 
