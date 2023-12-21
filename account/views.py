@@ -59,4 +59,3 @@ class CustomUserViewSet(viewsets.ModelViewSet):
         user.save()
         return Response({'msg': 'Successfully activated!'}, status=200)
 
-

@@ -11,3 +11,4 @@ psycopg2-binary
 pillow
 python-decouple
 leaflet
+django-rest-passwordreset

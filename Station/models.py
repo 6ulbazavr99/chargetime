@@ -17,14 +17,14 @@ class Column(models.Model):
         ('true', 'Свободно'),
         ('false', 'Не свободно'))
     price = models.PositiveIntegerField()
-    charge_type = models.OneToOneField('Station.charge_type')
+    # charge_type = models.OneToOneField('Station.charge_types', on_delete=models.CASCADE, related_name='columns')
     status = models.BooleanField()
 
 
 class Station(models.Model):
     charge_types = models.ManyToManyField(ChargeType, related_name='stations')
     desc = models.TextField()
-    columns = models.ForeignKey(Column,on_delete=models.CASCADE)
+    # columns = models.ForeignKey(Column,on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     schedule = RichTextField()
     images = models.ForeignKey(StationImage, on_delete=models.CASCADE)
@@ -43,8 +43,8 @@ class Station(models.Model):
 from django.contrib.auth import get_user_model
 from django.db import models
 
-
 User = get_user_model()
+
 
 
 class Review(models.Model):
