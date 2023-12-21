@@ -10,7 +10,7 @@ class StationImage(models.Model):
 
 
 
-class ChargeTypes(models.Model):
+class ChargeType(models.Model):
     type = models.CharField(max_length=255)
     power = models.PositiveIntegerField()
 
@@ -24,7 +24,7 @@ class Column(models.Model):
     status = models.BooleanField()
 
 class Station(models.Model):
-    charge_type = models.ManyToManyField(ChargeTypes, related_name='stations')
+    charge_types = models.ManyToManyField(ChargeType, related_name='stations')
     desc = models.TextField()
     #address
     #capacity =
