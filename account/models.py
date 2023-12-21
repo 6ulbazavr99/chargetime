@@ -4,7 +4,6 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from Station.models import ChargeType
 from account.managers import CustomUserManager
 
 
@@ -24,7 +23,7 @@ class CustomUser(AbstractUser):
     balance = models.IntegerField(default=0)
     bonuses = models.IntegerField(default=0)
     role = models.CharField(choices=ROLE_CHOICES, default='User')
-    charge_types = models.ManyToManyField(ChargeType, related_name='customusers', blank=True)
+    charge_types = models.ManyToManyField('Station.ChargeType', related_name='customusers', blank=True)
 
     is_active = models.BooleanField(
         _("active"),
