@@ -1,6 +1,5 @@
 from rest_framework import permissions
-
-# rest_framework.
+from rest_framework.permissions import IsAdminUser
 
 
 class IsStaff(permissions.BasePermission):
@@ -8,6 +7,19 @@ class IsStaff(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        if request.user.role == 'staff':
+        return request.user.role == 'staff'
+
+
+class IsUserProfile(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS:
             return True
-        return False
+
+        return request.user.id == obj.id
+
+
+class IsUserProfileOrAdmin(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if request.user.id == obj.id:
+            return True
+        return request.user.is_superuser

@@ -3,6 +3,12 @@ from django.db import models
 from ckeditor.fields import RichTextField
 
 
+class ChargeType(models.Model):
+    type = models.CharField(unique=True, max_length=50)
+    power = models.SmallIntegerField()
+
+
+
 class Station(models.Model):
     #charge_type = models.ManyToManyField(Charge_Type, related_name='stations')
     desc = models.TextField()

@@ -5,21 +5,34 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
 from rest_framework.response import Response
 
-from .serializers import UserSerializer, RegisterSerializer
+from .permissions import IsUserProfile, IsUserProfileOrAdmin
+from .serializers import UserSerializer, RegisterSerializer, UserProfileSerializer
 from .utils import send_confirmation_email
+
 
 User = get_user_model()
 
 
 class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
-    # permission_classes = [IsAuthenticatedOrReadOnly]
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_serializer_class(self):
         if self.action == 'create':
             return RegisterSerializer
-        return UserSerializer
+        if self.action == 'list':
+            return UserSerializer
+        return UserProfileSerializer
+
+    def get_permissions(self):
+        if self.action == 'create':
+            return [AllowAny()]
+        if self.action in ('update', 'partial_update'):
+            return [IsUserProfile()]
+        if self.action == 'list':
+            return [AllowAny()]
+        if self.action in ('retrieve', 'destroy'):
+            return [IsUserProfileOrAdmin()]
 
     def create(self, request, *args, **kwargs):
         serializer = RegisterSerializer(data=request.data)
