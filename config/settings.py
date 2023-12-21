@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     # my_apps
     'Station',
     'account',
-    'feedback',
 ]
 
 MIDDLEWARE = [

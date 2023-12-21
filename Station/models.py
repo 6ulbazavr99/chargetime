@@ -1,5 +1,12 @@
-from django.db import models
 from ckeditor.fields import RichTextField
+from django.contrib.auth import get_user_model
+from django.db import models
+
+
+User = get_user_model()
+
+
+
 
 
 class StationImage(models.Model):
@@ -12,6 +19,11 @@ class ChargeType(models.Model):
     power = models.PositiveIntegerField()
 
 
+
+
+
+
+
 class Column(models.Model):
     STATUS_CHOICES = (
         ('true', 'Свободно'),
@@ -19,6 +31,10 @@ class Column(models.Model):
     price = models.PositiveIntegerField()
     charge_type = models.OneToOneField('Station.charge_type')
     status = models.BooleanField()
+
+
+
+
 
 
 class Station(models.Model):
@@ -29,8 +45,11 @@ class Station(models.Model):
     schedule = RichTextField()
     images = models.ForeignKey(StationImage, on_delete=models.CASCADE)
     #address
-    #capacity =
+    capacity = models.PositiveIntegerField()
     #def __str__(self):
+
+
+
 
 
 #################################################################################################################
@@ -40,11 +59,9 @@ class Station(models.Model):
 #################################################################################################################
 
 
-from django.contrib.auth import get_user_model
-from django.db import models
 
 
-User = get_user_model()
+
 
 
 class Review(models.Model):

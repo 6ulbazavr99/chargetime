@@ -1,12 +1,65 @@
+from rest_framework import viewsets, permissions
+from .models import Review, ReviewImage, Rating, Station, Column, ChargeType
+from .serialiazer import ReviewSerializer, ReviewImageSerializer, RatingSerializer, StationSerializer, ColumnSerializer, \
+    ChargeTypeSerializer
+
+
+class StationViewSet(viewsets.ModelViewSet):
+    queryset = Station.objects.all()
+    serializer_class = StationSerializer
+
+
+class ColumnViewSet(viewsets.ModelViewSet):
+    queryset = Column.objects.all()
+    serializer_class = ColumnSerializer
+
+class ChargeTypeViewSet(viewsets.ModelViewSet):
+    queryset = ChargeType.objects.all()
+    serializer_class = ChargeTypeSerializer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #################################################################################################################
 ############################################## adilet ###################################################################
 #################################################################################################################
 ############################################### akylai ########################################################
 #################################################################################################################
 
-from rest_framework import viewsets, permissions
-from .models import Review, ReviewImage, Rating
-from .serialiazer import ReviewSerializer, ReviewImageSerializer, RatingSerializer
 
 
 class ReviewViewSet(viewsets.ModelViewSet):
