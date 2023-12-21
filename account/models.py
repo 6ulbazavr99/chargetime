@@ -25,7 +25,7 @@ class CustomUser(AbstractUser):
     bonuses = models.IntegerField(default=0)
     role = models.CharField(choices=ROLE_CHOICES, default='User')
     charge_types = models.ManyToManyField(ChargeType, related_name='customusers', blank=True)
-
+    #asdasd
     is_active = models.BooleanField(
         _("active"),
         default=True,  # False for confirmation by email
