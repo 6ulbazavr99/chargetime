@@ -23,3 +23,5 @@ class IsUserProfileOrAdmin(permissions.BasePermission):
         if request.user.id == obj.id:
             return True
         return request.user.is_superuser
+
+#==========================================
