@@ -34,7 +34,6 @@ class Station(models.Model):
     images = models.ForeignKey(StationImage, on_delete=models.CASCADE)
     #def __str__(self):
 
-#edwef
 
 
 
