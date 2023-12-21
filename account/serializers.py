@@ -8,8 +8,14 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        exclude = ('password',)
-        # fields = '__all__'
+        # exclude = ('password',)
+        fields = ('first_name', 'last_name', 'avatar', 'username')
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('email', 'first_name', 'last_name', 'avatar', 'username', 'phone')
 
 
 class RegisterSerializer(serializers.ModelSerializer):

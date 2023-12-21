@@ -3,7 +3,6 @@ from django.db import models
 from ckeditor.fields import RichTextField
 
 
-
 class StationImage(models.Model):
     name = models.CharField(max_length=255,  blank=True)
     image = models.ImageField(null=True, blank=True)

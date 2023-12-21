@@ -23,4 +23,5 @@ class CustomUserManager(BaseUserManager):
         kwargs.setdefault('is_staff', True)
         kwargs.setdefault('is_superuser', True)
         kwargs.setdefault('is_active', True)
+        kwargs.setdefault('role', 'admin')
         return self._create_user(email, password, **kwargs)

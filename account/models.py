@@ -4,12 +4,18 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from Station.models import ChargeType
 from account.managers import CustomUserManager
 
 
 class CustomUser(AbstractUser):
+
+    ROLE_CHOICES = (
+        ('user', 'regular user'), ('staff', 'member of staff'), ('admin', 'administrator')
+    )
+
     email = models.EmailField(_('email address'), unique=True)
-    phone = models.CharField(blank=True, unique=True)
+    phone = models.CharField(unique=True, blank=True, null=True)
     username = models.CharField(max_length=100, unique=True)
     first_name = models.CharField(_("first name"), max_length=150, blank=True)
     last_name = models.CharField(_("last name"), max_length=150, blank=True)
@@ -17,8 +23,8 @@ class CustomUser(AbstractUser):
     avatar = models.ImageField(upload_to='avatars', blank=True, default='avatar/default_avatar.jpg')
     balance = models.IntegerField(default=0)
     bonuses = models.IntegerField(default=0)
-    # charge_type =
-    # role =
+    role = models.CharField(choices=ROLE_CHOICES, default='User')
+    charge_types = models.ManyToManyField(ChargeType, related_name='customusers', blank=True)
 
     is_active = models.BooleanField(
         _("active"),
@@ -30,8 +36,6 @@ class CustomUser(AbstractUser):
     )
 
     objects = CustomUserManager()
-    # USERNAME_FIELD = 'username'
-    # REQUIRED_FIELDS = []
 
     def __str__(self):
         return f'{self.username}'
@@ -39,6 +43,3 @@ class CustomUser(AbstractUser):
     def create_activation_code(self):
         code = str(uuid4())
         self.activation_code = code
-
-
-# TODO: dohuya
