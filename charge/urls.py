@@ -1,5 +1,5 @@
 from rest_framework.routers import SimpleRouter
-from station.views import ColumnViewSet, ChargeTypeViewSet
+from charge.views import ColumnViewSet, ChargeTypeViewSet
 
 
 router = SimpleRouter()
