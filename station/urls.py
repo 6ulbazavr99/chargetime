@@ -3,7 +3,7 @@ from station.views import StationViewSet
 
 
 router = SimpleRouter()
-router.register('station', StationViewSet)
+router.register('', StationViewSet)
 
 
 urlpatterns = []
