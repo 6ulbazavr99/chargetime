@@ -1,7 +1,9 @@
 from django.contrib import admin
-from django.contrib import admin
-from .models import Review, Rating, ReviewImage
+from .models import Review, Rating, ReviewImage, Station, Column, ChargeType
 
+admin.site.register(Station)
+admin.site.register(Column)
+admin.site.register(ChargeType)
 
 class ReviewImageInline(admin.TabularInline):
     model = ReviewImage

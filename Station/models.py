@@ -1,42 +1,35 @@
+from django.db import models
 from ckeditor.fields import RichTextField
 from django.contrib.auth import get_user_model
-from django.db import models
-
 
 User = get_user_model()
 
-
-
-
-
-from django.db import models
-from ckeditor.fields import RichTextField
 
 class StationImage(models.Model):
     name = models.CharField(max_length=255, blank=True)
     image = models.ImageField(null=True, blank=True)
 
+
 class ChargeType(models.Model):
     name = models.CharField(max_length=255)
     power = models.PositiveIntegerField()
 
+
 class Column(models.Model):
     price = models.PositiveIntegerField()
     station = models.ForeignKey('Station', related_name='columns', on_delete=models.CASCADE)
-    charge_type = models.ForeignKey(ChargeType, on_delete=models.CASCADE)
+    charge_type = models.OneToOneField(ChargeType, on_delete=models.CASCADE)
     status = models.BooleanField(default=True)
+    # number = models.PositiveSmallIntegerField(unique=True)
+
 
 class Station(models.Model):
-    charge_types = models.ManyToManyField(ChargeType, related_name='stations')
     desc = models.TextField()
     name = models.CharField(max_length=255)
     schedule = RichTextField()
-    images = models.ForeignKey(StationImage, on_delete=models.CASCADE)
-    capacity = models.PositiveIntegerField()
-
-
-
-
+    images = models.ForeignKey(StationImage, on_delete=models.CASCADE, blank=True, null=True)
+    # capacity = models.PositiveIntegerField()
+    # charge_types = models.ManyToManyField(ChargeType, related_name='stations')
 
 
 #################################################################################################################
@@ -44,10 +37,6 @@ class Station(models.Model):
 #################################################################################################################
 ############################################### akylai ########################################################
 #################################################################################################################
-
-
-
-
 
 
 class Review(models.Model):
