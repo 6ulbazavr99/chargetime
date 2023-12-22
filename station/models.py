@@ -13,3 +13,4 @@ class Station(models.Model):
     schedule = RichTextField()
     images = models.ForeignKey(StationImage, on_delete=models.CASCADE, blank=True, null=True)
     # address =
+#axaxa
