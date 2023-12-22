@@ -1,9 +1,6 @@
 from django.contrib import admin
-from .models import Review, Rating, ReviewImage, Station, Column, ChargeType
+from .models import Review, Rating, ReviewImage
 
-admin.site.register(Station)
-admin.site.register(Column)
-admin.site.register(ChargeType)
 
 class ReviewImageInline(admin.TabularInline):
     model = ReviewImage
@@ -21,8 +18,3 @@ class ReviewAdmin(admin.ModelAdmin):
 class RatingAdmin(admin.ModelAdmin):
     list_display = ('id', 'author', 'rating')
     list_display_links = ('author',)
-
-
-
-
-# Register your models here.
