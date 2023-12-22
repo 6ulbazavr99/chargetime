@@ -47,11 +47,14 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'ckeditor',
     'leaflet',
+    'django_rest_passwordreset',
+
 
     # my_apps
-    'Station',
+    'station',
     'account',
     'feedback',
+    'charge',
 ]
 
 MIDDLEWARE = [
@@ -203,4 +206,12 @@ SWAGGER_SETTINGS = {
         },
     },
     'USE_SESSION_AUTH': False
+}
+
+DJANGO_REST_PASSWORDRESET_TOKEN_CONFIG = {
+    "CLASS": "django_rest_passwordreset.tokens.RandomStringTokenGenerator",
+    "OPTIONS": {
+        "min_length": 10,
+        "max_length": 10
+    }
 }

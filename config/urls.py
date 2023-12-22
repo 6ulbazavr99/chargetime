@@ -25,6 +25,7 @@ from .drf_swagger import urlpatterns as doc_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/account/', include('account.urls')),
+    path('api/v1/station/', include('station.urls')),
 
 ]
 

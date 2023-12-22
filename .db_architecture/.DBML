@@ -9,7 +9,7 @@ Table Account {
   email email
   phone phone
   username varchar
-  charge_type id [ref: <> Charge_Type.id]
+  charge_types id [ref: <> Charge_Type.id]
   balance int
   bonuses int
   first_name varchar
@@ -21,11 +21,11 @@ Table Account {
 
 
 
-// station.app //
+// charge.app //
 Table Charge_Type {
   app station
   id int
-  type varchar
+  name varchar
   power int
 }
 
@@ -33,21 +33,25 @@ Table Column {
   app station
   id int
   price int
-  charge_type id [ref: - Station.charge_types]
+  charge_type id [ref: - Charge_Type.id]
   status bool
+  station id [ref: - Station.id]
 }
+// charge.app //
 
+
+
+// station.app //
 Table Station {
   app station
   id int
-  charge_types id [ref: <> Charge_Type.id] 
   description text
   address geo
-  name varchar 
-  columns id [ref: < Column.id]
-  capacity count [ref: < Station.columns]
+  name varchar
   schedule richtext
   images id [ref: < Station_Image.id]
+  charge_types columns_types
+  capacity columns_count
 }
 
 Table Station_Image {
@@ -56,7 +60,11 @@ Table Station_Image {
   image img
   name varchar
 }
+// station.app //
 
+
+
+// feedback.app //
 Table Review_Image {
   app station
   id int
@@ -72,4 +80,4 @@ Table Review {
   station id [ref: - Station.id]
   images id [ref: < Review_Image.id]
 }
-// station.app //
+// feedback.app //

@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.contrib import admin
 from .models import Review, Rating, ReviewImage
 
 
@@ -19,8 +18,3 @@ class ReviewAdmin(admin.ModelAdmin):
 class RatingAdmin(admin.ModelAdmin):
     list_display = ('id', 'author', 'rating')
     list_display_links = ('author',)
-
-
-
-
-# Register your models here.
