@@ -9,3 +9,4 @@ router.register('type', ChargeTypeViewSet)
 
 urlpatterns = []
 urlpatterns += router.urls
+
