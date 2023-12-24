@@ -12,4 +12,4 @@ class Station(models.Model):
     name = models.CharField(max_length=255)
     schedule = RichTextField()
     images = models.ForeignKey(StationImage, on_delete=models.CASCADE, blank=True, null=True)
-    # address =
+    address = models.CharField(blank=True, null=True, default='geo')
