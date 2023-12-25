@@ -15,4 +15,4 @@ class StationViewSet(viewsets.ModelViewSet):
     # filterset_fields = '__all__'
     # search_fields = '__all__'
 
-# TODO - create filter for PointField(address)
+

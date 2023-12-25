@@ -9,6 +9,7 @@ router.register('', views.CustomUserViewSet)
 
 
 urlpatterns = [
+    # path('activate/<uuid:uuid>/', views.activate_user, name='activate-user'),
     path('login/', TokenObtainPairView.as_view()),
     path('refresh/', TokenRefreshView.as_view()),
     path('password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),

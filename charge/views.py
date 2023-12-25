@@ -42,5 +42,3 @@ class ChargeTypeViewSet(viewsets.ModelViewSet):
     queryset = ChargeType.objects.all()
     serializer_class = ChargeTypeSerializer
 
-
-# TODO - add new responses to charging
