@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
 
     # inst_apps
     'rest_framework',
@@ -49,7 +50,6 @@ INSTALLED_APPS = [
     'leaflet',
     'django_rest_passwordreset',
 
-
     # my_apps
     'station',
     'account',
@@ -60,6 +60,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -93,8 +94,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        # 'ENGINE': 'django.contrib.gis.db.backends.postgis', # gdal required
+        'ENGINE': 'django.contrib.gis.db.backends.postgis', # gdal required
         'NAME': cfg('DB_NAME'),
         'USER': cfg('DB_USER'),
         'PASSWORD': cfg('DB_PASSWORD'),
@@ -135,6 +135,9 @@ USE_I18N = True
 USE_TZ = True
 
 
+# CORS_ALLOW_ALL_ORIGINS: True
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -155,6 +158,12 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 10,
+
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
+
 }
 
 SIMPLE_JWT = {
@@ -215,3 +224,7 @@ DJANGO_REST_PASSWORDRESET_TOKEN_CONFIG = {
         "max_length": 10
     }
 }
+
+
+GDAL_LIBRARY_PATH = '/opt/homebrew/opt/gdal/lib/libgdal.dylib'  # for
+GEOS_LIBRARY_PATH = '/opt/homebrew/opt/geos/lib/libgeos_c.dylib'    # macOS

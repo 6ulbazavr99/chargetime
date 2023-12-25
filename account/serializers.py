@@ -8,13 +8,13 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'avatar', 'username')
+        fields = ('first_name', 'last_name', 'avatar', 'username', 'charge_types', 'id')
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name', 'avatar', 'username', 'phone')
+        fields = ('email', 'first_name', 'last_name', 'avatar', 'username', 'phone', 'charge_types', 'balance', 'bonuses')
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -26,7 +26,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('email', 'password', 'password2',
-                  'first_name', 'last_name', 'avatar', 'username', 'phone')
+                  'first_name', 'last_name', 'avatar', 'username', 'phone', 'charge_types')
 
     def validate(self, attrs):
         password = attrs['password']

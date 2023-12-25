@@ -1,4 +1,4 @@
-from django.db import models
+from django.contrib.gis.db import models
 from ckeditor.fields import RichTextField
 
 
@@ -12,4 +12,4 @@ class Station(models.Model):
     name = models.CharField(max_length=255)
     schedule = RichTextField()
     images = models.ForeignKey(StationImage, on_delete=models.CASCADE, blank=True, null=True)
-    # address =
+    address = models.PointField()
