@@ -24,7 +24,6 @@ class CustomUser(AbstractUser):
     balance = models.IntegerField(default=0)
     bonuses = models.IntegerField(default=0)
     role = models.CharField(choices=ROLE_CHOICES, default='User')
-    # charge_types = models.ManyToManyField('charge.ChargeType', related_name='customusers', blank=True)
     charge_types = models.ManyToManyField(ChargeType, related_name='customusers', blank=True)
 
     is_active = models.BooleanField(

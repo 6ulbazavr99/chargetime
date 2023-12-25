@@ -1,4 +1,4 @@
-from rest_framework import viewsets, generics, serializers
+from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -24,7 +24,7 @@ class ColumnViewSet(viewsets.ModelViewSet):
             value = serializer.validated_data.get('value')
             price = column.price * value
 
-            if balance > price:
+            if balance >= price:
                 balance = balance - price
                 user.balance = balance
 
@@ -33,7 +33,7 @@ class ColumnViewSet(viewsets.ModelViewSet):
 
                 user.save()
 
-            return Response({'msg': f'-{price} -> {user.balance} [{user.bonuses}]'}, status=200)
+                return Response({'msg': f'-{price} -> {user.balance} [{user.bonuses}]'}, status=200)
 
         return Response({'msg': 'There are not enough funds'}, status=400)
 
@@ -43,10 +43,4 @@ class ChargeTypeViewSet(viewsets.ModelViewSet):
     serializer_class = ChargeTypeSerializer
 
 
-# class ChargeCreateView(generics.CreateAPIView):
-#     # serializer_class = serializers.SerializerMethodField
-#     permission_classes = (permissions.IsAuthenticated, )
-#
-#     def perform_create(self, serializer):
-#         serializer.save(owner=self.request.user)
-
+# TODO - add new responses to charging

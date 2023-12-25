@@ -20,16 +20,7 @@ class ColumnSerializer(serializers.ModelSerializer):
 
 class ChargeSerializer(serializers.ModelSerializer):
     value = serializers.IntegerField()
-    # username = serializers.ReadOnlyField(source='request.user')
-    # balance = serializers.ReadOnlyField(source='request.balance')
-    # bonuses = serializers.ReadOnlyField(source='request.bonuses')
 
     class Meta:
         model = ChargeType
         fields = ('value', )
-
-
-# class ChargeSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Column
-#         fields = ('price', 'status', 'station')
