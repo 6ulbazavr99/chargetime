@@ -7,8 +7,7 @@ from rest_framework.response import Response
 
 from .permissions import IsUserProfile, IsUserProfileOrAdmin
 from .serializers import UserSerializer, RegisterSerializer, UserProfileSerializer
-from .utils import send_confirmation_email
-
+from config.tasks import send_confirmation_email_task
 
 User = get_user_model()
 
@@ -25,12 +24,14 @@ class CustomUserViewSet(viewsets.ModelViewSet):
         return UserProfileSerializer
 
     def get_permissions(self):
-        if self.action == 'create':
+        # if self.action == 'activate':
+        #     return [AllowAny()]
+        if self.action in ('create', 'list', 'activate'):
             return [AllowAny()]
         if self.action in ('update', 'partial_update'):
             return [IsUserProfile()]
-        if self.action == 'list':
-            return [AllowAny()]
+        # if self.action == 'list':
+        #     return [AllowAny()]
         if self.action in ('retrieve', 'destroy'):
             return [IsUserProfileOrAdmin()]
 
@@ -40,7 +41,7 @@ class CustomUserViewSet(viewsets.ModelViewSet):
         user = serializer.save()
         if user:
             try:
-                send_confirmation_email(user.email, user.activation_code)
+                send_confirmation_email_task.delay(user.email, user.activation_code)
             except Exception as e:
                 print(e, '!!!!!!!')
                 return Response({'msg': 'Registered, but troubles with email!',
@@ -51,6 +52,7 @@ class CustomUserViewSet(viewsets.ModelViewSet):
     @action(['GET'], detail=False, url_path='activate/(?P<uuid>[0-9A-Fa-f-]+)')
     def activate(self, request, uuid):
         try:
+            print(uuid, 'SFSFSFF')
             user = User.objects.get(activation_code=uuid)
         except User.DoesNotExist:
             return Response({'msg': 'Invalid link or link expired!'}, status=400)
@@ -58,3 +60,20 @@ class CustomUserViewSet(viewsets.ModelViewSet):
         user.activation_code = ''
         user.save()
         return Response({'msg': 'Successfully activated!'}, status=200)
+
+
+# @action(['GET'], detail=False, url_path='activate/(?P<uuid>[0-9A-Fa-f-]+)')
+# def activate(self, request, uuid):
+#     try:
+#         print(uuid, 'SFSFSFF')
+#         user = User.objects.get(activation_code=uuid)
+#     except User.DoesNotExist:
+#         return Response({'msg': 'Invalid link or link expired!'}, status=400)
+#
+#     if user.activation_code != '':  # Проверка на пустой код активации
+#         user.is_active = True
+#         user.activation_code = ''  # Очищаем код активации после активации пользователя
+#         user.save()
+#         return Response({'msg': 'Successfully activated!'}, status=200)
+#     else:
+#         return Response({'msg': 'User already activated!'}, status=400)

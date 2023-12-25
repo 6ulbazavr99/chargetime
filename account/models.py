@@ -19,7 +19,8 @@ class CustomUser(AbstractUser):
     username = models.CharField(max_length=100, unique=True)
     first_name = models.CharField(_("first name"), max_length=150, blank=True)
     last_name = models.CharField(_("last name"), max_length=150, blank=True)
-    activation_code = models.CharField(max_length=255, default='waiting for confirmation')
+    # activation_code = models.CharField(max_length=255, default='waiting for confirmation')
+    activation_code = models.CharField(max_length=255, blank=True)
     avatar = models.ImageField(upload_to='avatars', blank=True, default='avatar/default_avatar.jpg')
     balance = models.IntegerField(default=0)
     bonuses = models.IntegerField(default=0)
@@ -28,7 +29,7 @@ class CustomUser(AbstractUser):
 
     is_active = models.BooleanField(
         _("active"),
-        default=True,  # False for confirmation by email
+        default=False,  # False for confirmation by email
         help_text=_(
             "Designates whether this user should be treated as active. "
             "Unselect this instead of deleting accounts."

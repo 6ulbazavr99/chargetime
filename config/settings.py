@@ -228,3 +228,17 @@ DJANGO_REST_PASSWORDRESET_TOKEN_CONFIG = {
 
 GDAL_LIBRARY_PATH = '/opt/homebrew/opt/gdal/lib/libgdal.dylib'  # for
 GEOS_LIBRARY_PATH = '/opt/homebrew/opt/geos/lib/libgeos_c.dylib'    # macOS
+
+
+REDIS_HOST = 'localhost'
+# REDIS_HOST = 'redis'
+REDIS_PORT = '6379'
+
+CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+#                                        redis://redis:6379/0
+
+CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility': 3600}
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
