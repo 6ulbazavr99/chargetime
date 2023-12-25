@@ -14,10 +14,6 @@ class CustomUserManager(BaseUserManager):
         user = self.model(email=email, **kwargs)
         charge_types = kwargs.get('charge_types', [])
 
-        # if charge_types:
-        #     for charge_type in charge_types:
-        #         charge_type = ChargeType.objects.get(pk=charge_type.id)
-        #         user.charge_types.set(charge_type)
         if charge_types:
             charge_type_objects = ChargeType.objects.filter(pk__in=charge_types)
             user.charge_types.set(charge_type_objects)
