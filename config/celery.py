@@ -18,3 +18,5 @@ app.autodiscover_tasks()
 #  TODO - chat
 #  TODO - parsing
 #  TODO - tg ?
+#  TODO - polish
+#  TODO - testing
