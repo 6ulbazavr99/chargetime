@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'leaflet',
     'django_rest_passwordreset',
 
-
     # my_apps
     'station',
     'account',
@@ -61,7 +60,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
+    # 'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -226,7 +225,7 @@ DJANGO_REST_PASSWORDRESET_TOKEN_CONFIG = {
     }
 }
 
-GDAL_LIBRARY_PATH = '/opt/homebrew/Cellar/gdal/3.8.2'
-GEOS_LIBRARY_PATH = '/opt/homebrew/Cellar/geos/3.12.1'
+# GDAL_LIBRARY_PATH = '/opt/homebrew/Cellar/gdal/3.8.2'
+# GEOS_LIBRARY_PATH = '/opt/homebrew/Cellar/geos/3.12.1'
 # GDAL_LIBRARY_PATH = '/opt/homebrew/Cellar/gdal/3.8.2/lib/libgdal.dylib'  # Замените libgdal.dylib на фактический файл
 # GEOS_LIBRARY_PATH = '/opt/homebrew/Cellar/geos/3.12.1/lib/libgeos.dylib'  # Замените libgeos.dylib на фактический файл
