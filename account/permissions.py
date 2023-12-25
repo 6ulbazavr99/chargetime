@@ -16,6 +16,9 @@ class IsUserProfile(permissions.BasePermission):
 
         return request.user.id == obj.id
 
+    # def has_permission(self, request, view):
+    #     return request.user.id ==
+
 
 class IsUserProfileOrAdmin(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):

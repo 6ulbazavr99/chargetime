@@ -14,9 +14,10 @@ app.autodiscover_tasks()
 #  TODO - fix_activate_link
 #  TODO - deploy
 #  TODO - docker
-#  TODO - celery
+#  TODO - celery +
 #  TODO - chat
 #  TODO - parsing
 #  TODO - tg ?
 #  TODO - polish
 #  TODO - testing
+#  TODO - history

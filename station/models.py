@@ -13,3 +13,6 @@ class Station(models.Model):
     schedule = RichTextField()
     images = models.ForeignKey(StationImage, on_delete=models.CASCADE, blank=True, null=True)
     address = models.PointField()
+
+    def __str__(self):
+        return f'{self.name} ({self.address})'

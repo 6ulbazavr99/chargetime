@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
+from account.models import ChargeHistory
+
 User = get_user_model()
 
 
@@ -11,10 +13,17 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('first_name', 'last_name', 'avatar', 'username', 'charge_types', 'id')
 
 
+class ChargeHistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ChargeHistory
+        fields = '__all__'
+
+
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name', 'avatar', 'username', 'phone', 'charge_types', 'balance', 'bonuses')
+        fields = ('email', 'first_name', 'last_name', 'avatar', 'username',
+                  'phone', 'charge_types', 'balance', 'bonuses', )
 
 
 class RegisterSerializer(serializers.ModelSerializer):
