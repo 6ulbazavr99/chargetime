@@ -12,3 +12,6 @@ pillow
 python-decouple
 django-leaflet
 django_rest_passwordreset
+
+
+requests

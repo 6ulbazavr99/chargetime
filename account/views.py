@@ -1,14 +1,15 @@
+from rest_framework.response import Response
 from django.contrib.auth import get_user_model
+from rest_framework.exceptions import PermissionDenied
 
-from rest_framework import viewsets
+from rest_framework import viewsets, generics, permissions
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
-from rest_framework.response import Response
 
+from .models import ChargeHistory
 from .permissions import IsUserProfile, IsUserProfileOrAdmin
-from .serializers import UserSerializer, RegisterSerializer, UserProfileSerializer
-from .utils import send_confirmation_email
-
+from .serializers import UserSerializer, RegisterSerializer, UserProfileSerializer, ChargeHistorySerializer
+from config.tasks import send_confirmation_email_task
 
 User = get_user_model()
 
@@ -25,12 +26,10 @@ class CustomUserViewSet(viewsets.ModelViewSet):
         return UserProfileSerializer
 
     def get_permissions(self):
-        if self.action == 'create':
+        if self.action in ('create', 'list', 'activate'):
             return [AllowAny()]
         if self.action in ('update', 'partial_update'):
             return [IsUserProfile()]
-        if self.action == 'list':
-            return [AllowAny()]
         if self.action in ('retrieve', 'destroy'):
             return [IsUserProfileOrAdmin()]
 
@@ -40,9 +39,8 @@ class CustomUserViewSet(viewsets.ModelViewSet):
         user = serializer.save()
         if user:
             try:
-                send_confirmation_email(user.email, user.activation_code)
+                send_confirmation_email_task.delay(user.email, user.activation_code)
             except Exception as e:
-                print(e, '!!!!!!!')
                 return Response({'msg': 'Registered, but troubles with email!',
                                  'data': serializer.data}, status=201)
         return Response({'msg': 'Registered and sent mail!', 'data': serializer.data},
@@ -58,3 +56,15 @@ class CustomUserViewSet(viewsets.ModelViewSet):
         user.activation_code = ''
         user.save()
         return Response({'msg': 'Successfully activated!'}, status=200)
+
+
+class ChargeHistoryView(generics.ListAPIView):
+    serializer_class = ChargeHistorySerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_authenticated:
+            return ChargeHistory.objects.filter(user_history__user=user)
+        else:
+            raise PermissionDenied("User is not authenticated")

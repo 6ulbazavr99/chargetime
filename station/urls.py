@@ -8,3 +8,5 @@ router.register('', StationViewSet)
 
 urlpatterns = []
 urlpatterns += router.urls
+
+# path('reverse-geocode/', ReverseGeocodingView.as_view(), name='reverse-geocode'),
