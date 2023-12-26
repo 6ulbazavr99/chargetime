@@ -18,3 +18,4 @@ class ReviewAdmin(admin.ModelAdmin):
 class RatingAdmin(admin.ModelAdmin):
     list_display = ('id', 'author', 'rating')
     list_display_links = ('author',)
+    inlines = [ReviewImageInline]
