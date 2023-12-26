@@ -16,12 +16,12 @@ services:
       - migration
 
   db:
-    image: postgres
+    image: postgis/postgis
     restart: always
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: shop_db
+      POSTGRES_DB: chargetime_db
       POSTGRES_USER: commieloliqq
       POSTGRES_PASSWORD: 1
     volumes:
@@ -30,8 +30,8 @@ services:
   migration:
     build: .
     command: >
-      sh -c "python3 manage.py makemigrations &&
-             python3 manage.py migrate"
+      sh -c "python3 manage.py makemigrations"
+      sh -c "python3 manage.py migrate"
     volumes:
       - .:/usr/src/app/
     depends_on:

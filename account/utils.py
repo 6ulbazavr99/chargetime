@@ -9,7 +9,7 @@ HOST = 'localhost:8000'
 
 
 def send_confirmation_email(user, code):
-    link = f'http://{HOST}/api/v1/accounts/activate/{code}/'
+    link = f'http://{HOST}/api/v1/account/activate/{code}/'
     send_mail(
         'ANVAR LOX! Здравствуйте, активируйте ваш аккаунт!',
         f'Что активировать ваш аккаунт нужно перейти по ссылке ниже:'
