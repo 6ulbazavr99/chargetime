@@ -14,7 +14,6 @@ class StationViewSet(viewsets.ModelViewSet):
     queryset = Station.objects.all()
     serializer_class = StationSerializer
 
-<<<<<<< HEAD
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     filterset_fields = ('name', 'desc', 'schedule', )
     search_fields = ('name', 'desc', 'schedule', )
@@ -53,8 +52,17 @@ class StationViewSet(viewsets.ModelViewSet):
     #                             status=400)
     #     else:
     #         return Response(serializer.errors, status=400)
-=======
+
+
+
+
+
+
+
+
+
+
+
     # filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     # filterset_fields = '__all__'
     # search_fields = ['name', ]проблема с swaggerom
->>>>>>> 3d828ada673adac234b98ab2dd9b54cb45bfe3eb

@@ -26,10 +26,4 @@ class Station(models.Model):
     address = models.PointField()
 
     def __str__(self):
-<<<<<<< HEAD
         return f'{self.name} ({self.address})'
-=======
-        return f'{self.name}'
-
-
->>>>>>> 3d828ada673adac234b98ab2dd9b54cb45bfe3eb

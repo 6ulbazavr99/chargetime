@@ -7,7 +7,7 @@ from .models import Column, ChargeType
 @admin.register(Column)
 class ColumnAdmin(admin.ModelAdmin):
     list_display = ('id', 'price', 'station')
-    list_display_links = ('',)
+    list_display_links = ('station',)
 
 
 @admin.register(ChargeType)
