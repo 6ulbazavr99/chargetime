@@ -5,6 +5,23 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from account.managers import CustomUserManager
+from charge.models import ChargeType, Column
+from station.models import Station
+
+
+class UserHistory(models.Model):
+    user = models.OneToOneField('CustomUser', on_delete=models.CASCADE)
+    last_login_date = models.DateTimeField(auto_now=True)
+
+
+class ChargeHistory(models.Model):
+    user_history = models.ForeignKey('UserHistory', on_delete=models.CASCADE)
+    message = models.CharField(max_length=255)
+    date = models.DateField(auto_now=True)
+    time = models.TimeField(auto_now=True)
+    charge_type = models.ForeignKey(ChargeType, null=True, blank=True, on_delete=models.SET_NULL)
+    column = models.ForeignKey(Column, null=True, blank=True, on_delete=models.SET_NULL)
+    station = models.ForeignKey(Station, null=True, blank=True, on_delete=models.SET_NULL)
 
 
 class CustomUser(AbstractUser):
@@ -23,11 +40,12 @@ class CustomUser(AbstractUser):
     balance = models.IntegerField(default=0)
     bonuses = models.IntegerField(default=0)
     role = models.CharField(choices=ROLE_CHOICES, default='User')
-    charge_types = models.ManyToManyField('charge.ChargeType', related_name='customusers', blank=True)
+    charge_types = models.ManyToManyField(ChargeType, related_name='customusers', blank=True)
+    history = models.OneToOneField(UserHistory, null=True, blank=True, on_delete=models.SET_NULL)
 
     is_active = models.BooleanField(
         _("active"),
-        default=True,  # False for confirmation by email
+        default=False,  # False for confirmation by email
         help_text=_(
             "Designates whether this user should be treated as active. "
             "Unselect this instead of deleting accounts."

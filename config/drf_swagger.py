@@ -8,7 +8,21 @@ schema_view = get_schema_view(
    openapi.Info(
       title="chargetime API",
       default_version='v1',
-      description="Test description",
+      description="""
+      
+{"email": "andreypirozhkov54@gmail.com",
+  "password": "stringst",
+  "password2": "stringst",
+  "first_name": "string",
+  "last_name": "string",
+  "username": "string",
+  "phone": "string"}
+      
+   redis-server
+   python -m celery -A config worker -l info
+   ./manage.py runserver
+   
+      """,
       terms_of_service="https://www.google.com/policies/terms/",
       contact=openapi.Contact(email="contact@snippets.local"),
       license=openapi.License(name="BSD License"),

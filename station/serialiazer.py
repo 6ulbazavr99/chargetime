@@ -2,6 +2,23 @@ from rest_framework import serializers
 from charge.models import ChargeType
 from charge.serialiazer import ColumnSerializer, ChargeTypeSerializer
 from .models import StationImage, Station
+# , Coordinates  # , # Coordinates
+
+
+# class CoordinatesSerializer(serializers.Serializer):
+#     # latitude = serializers.FloatField()
+#     # longitude = serializers.FloatField()
+#
+#     # def get_latitude(self):
+#
+#     class Meta:
+#         model = Coordinates
+#     #     # fields = ['latitude', 'longitude']
+#         fields = '__all__'
+#
+#
+# class AddressSerializer(serializers.Serializer):
+#     address = serializers.CharField()
 
 
 class StationSerializer(serializers.ModelSerializer):
