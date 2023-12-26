@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'account',
     'feedback',
     'charge',
+    'geo',
 ]
 
 MIDDLEWARE = [
@@ -230,8 +231,9 @@ GDAL_LIBRARY_PATH = '/opt/homebrew/opt/gdal/lib/libgdal.dylib'  # for
 GEOS_LIBRARY_PATH = '/opt/homebrew/opt/geos/lib/libgeos_c.dylib'    # macOS
 
 
-REDIS_HOST = 'localhost'
 # REDIS_HOST = 'redis'
+
+REDIS_HOST = 'localhost'
 REDIS_PORT = '6379'
 
 CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'

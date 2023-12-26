@@ -12,7 +12,4 @@ class StationViewSet(viewsets.ModelViewSet):
     filterset_fields = ('name', 'desc', 'schedule', )
     search_fields = ('name', 'desc', 'schedule', )
 
-    # filterset_fields = '__all__'
-    # search_fields = '__all__'
-
 

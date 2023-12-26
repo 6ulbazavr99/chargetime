@@ -10,7 +10,6 @@ router.register('', views.CustomUserViewSet)
 
 
 urlpatterns = [
-    # path('activate/<uuid:uuid>/', views.activate_user, name='activate-user'),
     path('history/', ChargeHistoryView.as_view()),
     path('login/', TokenObtainPairView.as_view()),
     path('refresh/', TokenRefreshView.as_view()),

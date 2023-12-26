@@ -12,6 +12,7 @@ urlpatterns = [
     path('api/v1/station/', include('station.urls')),
     path('api/v1/charge/', include('charge.urls')),
     path('api/v1/feedback/', include('feedback.urls')),
+    path('api/v1/geo/', include('geo.urls')),
 
 ]
 
