@@ -11,7 +11,11 @@ psycopg2-binary
 pillow
 python-decouple
 django-leaflet
+<<<<<<< HEAD
 django_rest_passwordreset
 
 
 requests
+=======
+django_rest_passwordreset
+>>>>>>> 3d828ada673adac234b98ab2dd9b54cb45bfe3eb
