@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'account',
     'feedback',
     'charge',
-    'geo',
+
 ]
 
 MIDDLEWARE = [
