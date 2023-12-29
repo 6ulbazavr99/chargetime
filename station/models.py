@@ -10,7 +10,6 @@ from ckeditor.fields import RichTextField
 #         return f"Latitude: {self.latitude}, Longitude: {self.longitude}"
 
 
-
 class StationImage(models.Model):
     name = models.CharField(max_length=255, blank=True)
     image = models.ImageField(null=True, blank=True)

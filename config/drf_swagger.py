@@ -7,23 +7,25 @@ from drf_yasg import openapi
 schema_view = get_schema_view(
    openapi.Info(
       title="chargetime API",
-      default_version='v1',
+      default_version='v2',
       description="""
       
-{"email": "andreypirozhkov54@gmail.com",
-  "password": "stringst",
-  "password2": "stringst",
-  "first_name": "string",
-  "last_name": "string",
-  "username": "string",
-  "phone": "string"}
+{
+   "email": "andreypirozhkov54@gmail.com",
+   "password": "bastard123",
+   "password2": "bastard123",
+   "first_name": "Andrey",
+   "last_name": "Pirozhkov",
+   "username": "andreypirozhkov54",
+   "phone": "+996777123123"
+}
       
+   ./manage.py runserver
    redis-server
    python -m celery -A config worker -l info
-   ./manage.py runserver
    
       """,
-      terms_of_service="https://www.google.com/policies/terms/",
+      terms_of_service="https://www.youtube.com/watch?v=aZWWlqDy8nE",
       contact=openapi.Contact(email="contact@snippets.local"),
       license=openapi.License(name="BSD License"),
    ),

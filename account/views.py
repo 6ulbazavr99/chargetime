@@ -30,7 +30,6 @@ class CustomUserViewSet(viewsets.ModelViewSet):
             return [AllowAny()]
         if self.action in ('update', 'partial_update'):
             return [IsUserProfile()]
-       # if self.action in ('retrieve', 'destroy'):
         return [IsUserProfileOrAdmin()]
 
     def create(self, request, *args, **kwargs):

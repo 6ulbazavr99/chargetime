@@ -20,3 +20,13 @@ urlpatterns += doc_urls  # swagger docs urls
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+#  TODO - create filter for PointField(address)
+#  TODO - permissions
+#  TODO - fix_activate_link
+#  TODO - deploy
+#  TODO - docker
+#  TODO - chat
+#  TODO - parsing
+#  TODO - API Google Geocoding ???

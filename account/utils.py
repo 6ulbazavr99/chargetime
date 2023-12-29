@@ -5,7 +5,8 @@ from django.dispatch import receiver
 from django_rest_passwordreset.signals import reset_password_token_created
 
 
-HOST = '34.42.139.23'
+# HOST = '34.42.139.23'
+HOST = 'localhost:8000'
 
 
 def send_confirmation_email(user, code):
